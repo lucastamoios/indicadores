@@ -1,0 +1,10 @@
+*.pyc
+*.retry
+*.swo
+*.swp
+*.sqlite3
+.tox
+.cache
+.coverage
+.ropeproject
+__pycache__
