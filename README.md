@@ -15,10 +15,7 @@ ocorra com:
 ```
 >>> from indicadores import Tesouro
 >>> Tesouro().atualizar()
-True
 ```
-
-O retorno da função informa se foi ou não necessário atualizar.
 
 Para obter informações de um título específico, é necessário utilizar a classe Tesouro.
 

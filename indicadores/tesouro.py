@@ -29,7 +29,9 @@ class Tesouro:
         'PU Extrato': 'preço_base',
     }
 
-    def __init__(self):
+    def __init__(self, título, vencimento):
+        self.título = self._valida_título(título)
+        self.vencimento = self._valida_vencimento(vencimento)
         self._dados = None
 
     def atualiza(self, titulo=None):
@@ -37,6 +39,12 @@ class Tesouro:
         self._dados = {}
         for tipo_título, urls_anuais in todas_urls.items():
             self._dados[tipo_título] = self._atualiza_título(urls_anuais)
+
+    def _valida_título(self, título):
+        return título
+
+    def _valida_vencimento(self, vencimento):
+        return vencimento
 
     def _atualiza_título(self, urls_anuais):
         dados_por_ano = {}
@@ -80,7 +88,7 @@ class Tesouro:
         Caso essa informação seja de anos antigos, verifica-se se existe um
         cassete salvo.
         """
-        if ano == arrow.now().year:
+        if ano == str(arrow.now().year):
             r = requests.get(url, verify=False)
         else:
             nome_cassete = hashlib.sha256(bytes(url, 'utf8')).hexdigest()[:12]
@@ -93,11 +101,11 @@ class Tesouro:
         data_frames = pandas.read_excel(arquivo_excel, sheet_name=None)
         planilhas = {}
         for data_frame in data_frames.values():
-            vencimento = self._valida_data_vencimento(data_frame.columns[1])
+            vencimento = self._valida_data_vencimento_da_planilha(data_frame.columns[1])
             planilhas[vencimento] = self._obtém_colunas_da_planilha(data_frame)
         return planilhas
 
-    def _valida_data_vencimento(self, vencimento):
+    def _valida_data_vencimento_da_planilha(self, vencimento):
         if isinstance(vencimento, datetime.datetime):
             vencimento = vencimento.strftime('%d/%m/%Y')
         return vencimento
