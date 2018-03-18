@@ -23,10 +23,10 @@ class Tesouro:
         'Dia': 'data',
         'Taxa Compra': 'taxa_compra',
         'Taxa Venda': 'taxa_venda',
-        'PU Compra': 'preco_compra',
-        'PU Venda': 'preco_venda',
-        'PU Base': 'preco_base',
-        'PU Extrato': 'preco_base',
+        'PU Compra': 'preço_compra',
+        'PU Venda': 'preço_venda',
+        'PU Base': 'preço_base',
+        'PU Extrato': 'preço_base',
     }
 
     def __init__(self):
